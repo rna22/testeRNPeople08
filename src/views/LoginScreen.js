@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const LoginScreen = () => {
-  const { handleGoogleSignIn, loginModel,
+  const { handleSignInWithGoogle, loginModel,
             handleEmailChange, handlePasswordChange,
             handleLogin, handleGuestLogin, 
         } = useLoginViewModel();
@@ -38,15 +38,6 @@ const LoginScreen = () => {
                 <Text style={styles.btnText}>Login</Text>
             </Pressable>
             <Pressable title="Continue as Guest" onPress={handleGuestLogin} />
-        <View style={styles.subContainer}>
-            <Pressable style={styles.subButton}>
-                <Text style={styles.subTextButton}>Esqueci minha senha</Text>
-            </Pressable>
-            <Pressable style={styles.subButton}>
-                <Text style={styles.subTextButton}>Novo usuário</Text>
-            </Pressable>
-        </View>
-
         
         <View style={styles.googleContainer}>
             <Pressable style={styles.googleBtn} onPress={handleGuestLogin}>
@@ -56,7 +47,7 @@ const LoginScreen = () => {
       
         <View style={styles.googleContainer}>
             <Ionicons name="logo-google" size={24} color="black" />
-            <Pressable style={styles.googleBtn} onPress={handleGoogleSignIn}>
+            <Pressable style={styles.googleBtn} onPress={handleSignInWithGoogle}>
                 <Text>Continue with Google </Text>
             </Pressable>
         </View>

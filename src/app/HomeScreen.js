@@ -1,14 +1,17 @@
 
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet } from 'react-native';
-import { View, Text, Image, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, ActivityIndicator, TouchableOpacity, Pressable, StyleSheet  } from 'react-native';
+import { auth } from '../services/firebaseConfig';
+import { signOut } from 'firebase/auth';
+import { router } from 'expo-router';
 
 const HomeScreen = () => {
   const [dogs, setDogs] = useState([]);
   const [page, setPage] = useState(1);
   const [favorites, setFavorites] = useState(new Set());
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
   const fetchDogs = async (page = 1, limit = 4) => {
     try {
@@ -54,7 +57,9 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(setUser);
     loadDogs();
+    return () => unsubscribe();
   }, []);
 
   const handleLoadMore = () => {
@@ -94,27 +99,46 @@ const HomeScreen = () => {
     const breed = item.breed;
     const hasBreed = breed != null;
     const isFavorite = favorites.has(item.id);
+    const isGuest = user && user.isAnonymous; 
   
     return hasBreed ? (
       <View style={styles.itemContainer}>
         <Image source={{ uri: item.url }} style={styles.image} />
 
-        <TouchableOpacity 
-          style={[styles.favoriteButton, isFavorite && styles.favoriteButtonActive]} 
-          onPress={() => toggleFavorite(item.id)}
-        >
-          <Text style={styles.favoriteButtonText}>{isFavorite ? '♥' : '♡'}</Text>
-        </TouchableOpacity>
+        {!isGuest && (
+          <TouchableOpacity 
+            style={[styles.favoriteButton, isFavorite && styles.favoriteButtonActive]} 
+            onPress={() => toggleFavorite(item.id)}
+          >
+            <Text style={styles.favoriteButtonText}>{isFavorite ? '♥' : '♡'}</Text>
+          </TouchableOpacity>
+        )}
 
         <Text style={styles.name}>{breed.name}</Text>
         <Text style={styles.details}>Life Span: {breed.life_span}</Text>
       </View>
     ) : null; 
-  }, [favorites]);
+  }, [favorites, user]);
+
+  function logout() {
+    signOut(auth)
+    .then(() => {
+      alert("voce desconectou-se do sistema!");
+      router.replace('/');
+    })
+    .catch((error) => {
+      const errorMessage = error.errorMessage;
+      alert(errorMessage);
+    })
+  }
 
   return (
-      <>
-        <Text style={styles.txt}> Teste RNPeople</Text>
+      <View style={styles.internalContainer}>
+        <View style={styles.topBar}>
+          <Pressable onPress={logout}>
+            <Text style={styles.txt}>Sair</Text>
+          </Pressable>
+        </View>
 
         <FlatList
           data={filteredDogs}
@@ -127,7 +151,7 @@ const HomeScreen = () => {
           ListFooterComponent={renderFooter}
           getItemLayout={getItemLayout}
         />
-      </>
+      </View>
   );
 }
 
@@ -140,11 +164,9 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     txt: {
-      width: 200,
-      fontSize: "20px",
+      fontSize: 20,
       fontWeight: "bold",
-      padding: 16,
-      color: '#FF8C00',
+      color: 'white',
     },
     itemContainer: {
       flex: 1,
@@ -200,6 +222,15 @@ const styles = StyleSheet.create({
       paddingBottom: 10,
       paddingTop: 5,
     },
+    topBar: {
+      flexDirection: 'row-reverse',
+      padding: 10,
+      backgroundColor: "#FF8C00",
+      width: '100%',
+    },
+    internalContainer: {
+      paddingTop: 25,
+    }
   });
   
   export default HomeScreen;
