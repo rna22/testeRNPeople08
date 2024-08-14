@@ -1,14 +1,14 @@
 // src/viewmodels/LoginViewModel.js
 
 import { useState } from 'react';
-import useGoogleAuth from '../services/AuthService';
 import { LoginModel } from '../models/LoginModel';
-
-
+import { auth } from '../services/firebaseConfig';
+import { signInWithEmailAndPassword, signInAnonymously } from 'firebase/auth';
+import { useRouter } from 'expo-router';
 
 export default function useLoginViewModel() {
-  const { signInWithGoogle } = useGoogleAuth();
   const [loginModel, setLoginModel] = useState(new LoginModel());
+  const router = useRouter();
 
   const handleEmailChange = (email) => {
     setLoginModel((prevState) => ({ ...prevState, email }));
@@ -18,14 +18,36 @@ export default function useLoginViewModel() {
     setLoginModel((prevState) => ({ ...prevState, password }));
   };
 
-  const handleGoogleLogin = async () => {
-    
-  };
+  function handleLogin(){
+    signInWithEmailAndPassword(auth, loginModel.email, loginModel.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        router.replace("/HomeScreen");
+      })
+      .catch((error) =>{
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      })
+  }
+
+  function handleGuestLogin() { 
+    signInAnonymously(auth)
+      .then(() => {
+        router.replace("/HomeScreen");
+      })
+      .catch((error) =>{
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      alert(errorMessage);
+    })
+  }
 
   return {
-    handleGoogleLogin,
     loginModel,
     handleEmailChange,
     handlePasswordChange,
+    handleLogin,
+    handleGuestLogin
   };
 }

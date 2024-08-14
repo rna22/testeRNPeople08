@@ -1,12 +1,13 @@
 
 import React from 'react';
-import { View, Text, TextInput, ActivityIndicator, Pressable, Button} from 'react-native';
+import { View, Text, TextInput, Pressable} from 'react-native';
 import useLoginViewModel from '../viewmodels/LoginViewModel';
 import { StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 const LoginScreen = () => {
-  const { loading, error, handleGoogleLogin, loginModel,
+  const { handleGoogleSignIn, loginModel,
             handleEmailChange, handlePasswordChange,
             handleLogin, handleGuestLogin, 
         } = useLoginViewModel();
@@ -45,10 +46,17 @@ const LoginScreen = () => {
                 <Text style={styles.subTextButton}>Novo usuário</Text>
             </Pressable>
         </View>
+
+        
+        <View style={styles.googleContainer}>
+            <Pressable style={styles.googleBtn} onPress={handleGuestLogin}>
+                <Text>Try as Guest...</Text>
+            </Pressable>
+        </View>
       
         <View style={styles.googleContainer}>
             <Ionicons name="logo-google" size={24} color="black" />
-            <Pressable style={styles.googleBtn} onPress={handleGoogleLogin}>
+            <Pressable style={styles.googleBtn} onPress={handleGoogleSignIn}>
                 <Text>Continue with Google </Text>
             </Pressable>
         </View>
