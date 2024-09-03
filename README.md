@@ -1,5 +1,6 @@
 # **Teste React Native People**
 
+<br/>
 
 ## **Descrição**
 
@@ -9,8 +10,9 @@ O aplicativo permite que os usuários visualizem informações sobre diferentes 
 
 A aplicação consome dados da The Dog API.
 
+<br/>
 
-## **Funcionalidades Principais**
+## **Principais Funcionalidades**
 
 **Login:** Permite que o usuário faça login utilizando o cadastro criado no Firebase
 
@@ -22,6 +24,7 @@ A aplicação consome dados da The Dog API.
 
 **Consistência Visual:** O aplicativo foi desenvolvido para ter uma experiência visual consistente em Android e iOS.
 
+<br/>
 
 ## **Tecnologias Utilizadas**
 
@@ -35,17 +38,33 @@ A aplicação consome dados da The Dog API.
 
 **The Dog API:** API pública para obter dados dos cães.
 
+<br/>
 
 ## **Pré-requisitos**
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
+
+Baixe e instale a versão LTS do **Node.js** em:
+
 *[Node.js](https://nodejs.org/pt)*
+
+
+Após instalar o Node.js, abra seu terminal e instale o **Expo CLI** globalmente executando
 
 *[Expo CLI (Documentação)](https://docs.expo.dev/more/expo-cli/)*
 
-*[Git](https://git-scm.com)*
+```react
+npm install -g expo-cli
+```
 
+Instale o **Git** seguindo as instruções do site oficial: *[Git](https://git-scm.com/downloads)*
+
+**Aplicativo Expo Go:** O Expo Go é necessário para rodar o aplicativo no seu dispositivo móvel.
+
+Baixe o aplicativo Expo Go na *[App Store](https://apps.apple.com/us/app/expo-go/id982107779)* (para iOS) ou na *[Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)* (para Android).
+
+<br/>
 
 ## **Configuração do Firebase**
 
@@ -85,9 +104,88 @@ export const firebase = initializeApp(firebaseConfig);
 export const auth = getAuth(firebase);
 
 ```
+<br/>
 
-## **Como Rodar o Projeto**
+## **Passo a Passo para Rodar o Projeto**
 
 Utilize o *git clone* para entrar no meu projeto e inicie o *Expo Go* no seu dispositivo móvel.
 
+
+**1. Clone o Repositório**
+
+  Primeiro, clone o repositório do projeto para o seu ambiente local. Abra o terminal e execute o seguinte comando:
+
+```
+git clone https://github.com/rna22/testeRNPeople08
+cd testeRNPeople08
+```
+
+
+**2. Instale as Dependências**
+
+  Após clonar o repositório, você precisa instalar as dependências necessárias para rodar o projeto. No diretório do projeto, execute:
+
+```
+npm install
+```
+
+  Isso instalará todas as bibliotecas e módulos necessários listados no arquivo package.json.
+
+
+**3. Configurar o Firebase**
+
+- Crie um arquivo firebaseConfig.js na raiz do projeto e adicione as configurações do Firebase conforme as instruções no README.
+
+
+
+**4. Configurar Variáveis de Ambiente (*obs*)**
+
+  Algumas configurações podem exigir variáveis de ambiente. Crie um arquivo .env na raiz do projeto e adicione a chave da API da The Dog API:
+
+```
+DOG_API_KEY=your_dog_api_key
+```
+
+  Certifique-se de substituir your_dog_api_key pela sua chave de API real da The Dog API.
+
+
+**5. Inicie o Expo**
+
+  Com todas as dependências instaladas e configurações feitas, você está pronto para rodar o projeto com o Expo. No terminal, execute:
+
+```
+expo start
+```
+
+  Este comando irá iniciar o servidor de desenvolvimento do Expo e abrirá uma nova guia no seu navegador com o Expo Dev Tools.
+
+
+**6. Rodar o Aplicativo no Dispositivo Móvel**
+
+Para rodar o aplicativo no seu dispositivo móvel, siga estes passos:
+
+  - **Escanear o QR Code:**
+  
+    - No Expo Dev Tools, você verá um QR code na tela.
+    - Abra o aplicativo Expo Go no seu dispositivo móvel.
+    - Para usuários de iOS: Use a câmera do seu iPhone para escanear o QR code. A câmera deve reconhecer automaticamente o código e oferecer a opção de abrir o link no Expo Go.
+    - Para usuários de Android: Abra o Expo Go e use a opção de escanear QR code diretamente dentro do aplicativo.
+
+  
+- **Carregar o Aplicativo:**
+
+  - Após escanear o QR code, o aplicativo começará a ser carregado no Expo Go.
+  - Pode levar alguns segundos para o aplicativo ser carregado e exibido no seu dispositivo.
+<br/>
+  
+## **Problemas Comuns e Soluções**
+
+  - **Erro de Conexão:** Se você encontrar problemas ao conectar seu dispositivo ao Expo, verifique se ambos estão na mesma rede Wi-Fi.
+  - **Aplicativo Não Carrega:** Tente reiniciar o servidor Expo (Ctrl+C para parar e expo start novamente) e também reiniciar o aplicativo Expo Go.
+  - **Problemas com Variáveis de Ambiente:** Certifique-se de que o arquivo .env foi criado corretamente e que o Expo foi reiniciado após qualquer alteração nas variáveis de ambiente.
+<br/>
+
+## **Conclusão**
+
+Agora você está pronto para explorar e desenvolver seu próprio aplicativo Dog App com Expo! Se tiver alguma dúvida ou precisar de mais ajuda, sinta-se à vontade para consultar a documentação oficial do Expo ou abrir uma issue neste repositório.
 
