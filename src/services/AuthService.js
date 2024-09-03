@@ -1,4 +1,3 @@
-// src/services/AuthService.js
 
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
