@@ -1,61 +1,48 @@
 
 import React from 'react';
-import { View, Text, TextInput, Pressable} from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import useLoginViewModel from '../viewmodels/LoginViewModel';
-import { StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Ionicons from '@expo/vector-icons/Ionicons';
+
+const GuestButton = ({ onPress }) => (
+  <Pressable style={styles.googleBtn} onPress={onPress}>
+    <Text>Try as Guest...</Text>
+  </Pressable>
+);
 
 const LoginScreen = () => {
-  const { handleSignInWithGoogle, loginModel,
-            handleEmailChange, handlePasswordChange,
-            handleLogin, handleGuestLogin, 
-        } = useLoginViewModel();
+  const { loginModel, handleEmailChange, handlePasswordChange, handleLogin, handleGuestLogin } = useLoginViewModel();
 
   return (
-    
     <View style={styles.container}>
-            <MaterialCommunityIcons name="dog" size={80} color='#FF8C00' />
-            <Text style={styles.txt}> Teste RNPeople</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={loginModel.email}
-                onChangeText={handleEmailChange}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoComplete="email"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={loginModel.password}
-                onChangeText={handlePasswordChange}
-                secureTextEntry
-                autoCapitalize="none"
-            />
-            <Pressable style={styles.btnLogin} onPress={handleLogin}>
-                <Text style={styles.btnText}>Login</Text>
-            </Pressable>
-            <Pressable title="Continue as Guest" onPress={handleGuestLogin} />
-        
-        <View style={styles.googleContainer}>
-            <Pressable style={styles.googleBtn} onPress={handleGuestLogin}>
-                <Text>Try as Guest...</Text>
-            </Pressable>
-        </View>
-      
-        <View style={styles.googleContainer}>
-            <Ionicons name="logo-google" size={24} color="black" />
-            <Pressable style={styles.googleBtn} onPress={handleSignInWithGoogle}>
-                <Text>Continue with Google </Text>
-            </Pressable>
-        </View>
-      
+      <MaterialCommunityIcons name="dog" size={80} color='#FF8C00' />
+      <Text style={styles.txt}> Teste RNPeople</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={loginModel.email}
+        onChangeText={handleEmailChange}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoComplete="email"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={loginModel.password}
+        onChangeText={handlePasswordChange}
+        secureTextEntry
+        autoCapitalize="none"
+      />
+      <Pressable style={styles.btnLogin} onPress={handleLogin}>
+        <Text style={styles.btnText}>Login</Text>
+      </Pressable>
+      <GuestButton onPress={handleGuestLogin} />
     </View>
   );
-}
-  const styles = StyleSheet.create({
+};
+
+const styles = StyleSheet.create({
     container: {
       display: 'flex',
       justifyContent: 'center',
@@ -119,7 +106,6 @@ const LoginScreen = () => {
         color: "white",
         paddingLeft: 5,
     }
-
 
   });
   
