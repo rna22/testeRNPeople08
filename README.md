@@ -209,13 +209,13 @@ Para rodar o aplicativo no seu dispositivo móvel, siga estes passos:
 
 2. LoginScreen.js:
 
-- **GuestButton: Componente separado que exibe um botão para login como convidado.
-- **handleLogin: Função para realizar o login com e-mail/senha.
-- **handleGuestLogin: Função para realizar o login como convidado.
+- **GuestButton:** Componente separado que exibe um botão para login como convidado.
+- **handleLogin:** Função para realizar o login com e-mail/senha.
+- **handleGuestLogin:** Função para realizar o login como convidado.
 
 3. ApiUtils.js:
 
-- **Métodos post: Função para fazer uma requisição POST.
+- **Métodos post:** Função para fazer uma requisição POST.
 
 ## **Conclusão**
 
