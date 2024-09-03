@@ -154,7 +154,15 @@ DOG_API_KEY=your_dog_api_key
   Com todas as dependências instaladas e configurações feitas, você está pronto para rodar o projeto com o Expo. No terminal, execute:
 
 ```
-expo start
+npm install -g expo-cli
+```
+
+
+E após instala-lo, incie-o:
+
+
+```
+npx expo start --tunnel
 ```
 
   Este comando irá iniciar o servidor de desenvolvimento do Expo e abrirá uma nova guia no seu navegador com o Expo Dev Tools.
@@ -184,6 +192,30 @@ Para rodar o aplicativo no seu dispositivo móvel, siga estes passos:
   - **Aplicativo Não Carrega:** Tente reiniciar o servidor Expo (Ctrl+C para parar e expo start novamente) e também reiniciar o aplicativo Expo Go.
   - **Problemas com Variáveis de Ambiente:** Certifique-se de que o arquivo .env foi criado corretamente e que o Expo foi reiniciado após qualquer alteração nas variáveis de ambiente.
 <br/>
+
+## **Componentes Principais**
+
+1. HomeScreen.js:
+
+- **fetchDogs:** Função para buscar dados da API sobre cachorros.
+- **fetchBreeds:** Função para buscar dados da API sobre raças.
+- **combineDogsWithBreeds:** Função que combina os dados dos cachorros com as informações de suas raças.
+- **loadDogs:** Função que carrega os dados dos cachorros e raças e atualiza o estado.
+- **handleLoadMore:** Função que carrega mais cachorros quando o usuário rola para baixo.
+- **toggleFavorite:** Função que adiciona ou remove um cachorro dos favoritos.
+- **renderDog:** Função que renderiza cada cachorro usando o componente DogCard.
+- **DogCard:** Componente separado que exibe as informações de um cachorro e permite marcar como favorito.
+
+
+2. LoginScreen.js:
+
+- **GuestButton: Componente separado que exibe um botão para login como convidado.
+- **handleLogin: Função para realizar o login com e-mail/senha.
+- **handleGuestLogin: Função para realizar o login como convidado.
+
+3. ApiUtils.js:
+
+- **Métodos post: Função para fazer uma requisição POST.
 
 ## **Conclusão**
 
