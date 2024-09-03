@@ -1,4 +1,3 @@
-// src/viewmodels/LoginViewModel.js
 
 import { useState } from 'react';
 import { LoginModel } from '../models/LoginModel';
